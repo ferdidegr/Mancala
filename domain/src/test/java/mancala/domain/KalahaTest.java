@@ -7,13 +7,15 @@ public class KalahaTest{
 	Kalaha kalaha = new Kalaha();
 
 	@Test
-	public void test_getStonesEqualToFour(){
-		assertEquals(4,kalaha.getStones());
+	public void test_getStonesEqualToZero(){
+		assertEquals(0,kalaha.getStones());
 	}
 	
 	@Test
 	public void test_addStones(){
 		kalaha.addStones(3);
-		assertEquals(7,kalaha.getStones());
+		assertEquals(3,kalaha.getStones());
 	}
+
+
 }

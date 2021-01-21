@@ -7,7 +7,7 @@ public class PlayerTest{
 
 	Player playerA = new Player("Player A");
 	Player playerB = new Player("Player B");
-	
+	Player full = new Player("A","B");
 
 	@Test
 	public void test_namePlayerA(){
@@ -27,5 +27,21 @@ public class PlayerTest{
 		playerA.setActivePlayer();
 		assertFalse(playerB.isActivePlayer());
 	}
-	
+
+	@Test
+	public void test_last4BowlsMadeCorrectly(){
+		Kalaha startpoint = new Kalaha(playerA,null);
+		Bowl test = new Bowl(startpoint,5);
+		assertEquals(test.opposite,test.neighbour.neighbour.neighbour.neighbour);
+	}
+
+	@Test
+	public void test_14TimesNeighbourIsRound(){
+		Kalaha start = full.kalaha;
+		assertEquals(start,full.kalaha.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour.neighbour);
+	}
+
+
+
+
 }

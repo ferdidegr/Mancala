@@ -1,11 +1,18 @@
 package mancala.domain;
 
 public class Kalaha{
-	int stones = 4;
-	Bowl neighbour;
+	int stones = 0;
 	Player owner;
+	Kalaha neighbour;
+
+	Kalaha(){
+		stones = 0;
+	}
 	
-	
+	Kalaha(Player owner, Kalaha neighbour){
+		this.owner = owner;
+		this.neighbour = neighbour;
+	}
 	
 	public int getStones(){
 		return stones;
@@ -15,11 +22,7 @@ public class Kalaha{
 		this.stones += stones;
 	}
 	
-	public void passStones(int stones) throws NullPointerException{
-		if (neighbour == null){
-			throw new NullPointerException("No known neighbour!");
-		}
-		
+	public void passStones(int stones){
 		if(owner.isActivePlayer()){
 			addStones(1);
 			if(stones!=1){
