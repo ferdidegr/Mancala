@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class KalahaTest{
 	Kalaha kalaha = new Kalaha();
+	Player playerA = new Player("A","B");
+	Bowl bowl = (Bowl)playerA.opponent.kalaha.neighbour;
 
 	@Test
 	public void test_getStonesEqualToZero(){
@@ -17,5 +19,14 @@ public class KalahaTest{
 		assertEquals(3,kalaha.getStones());
 	}
 
+	@Test
+	public void test_TurnStaysWhenEndingInMancala(){
+		bowl.passStones(7);
+		assertTrue(playerA.isActivePlayer());
+	}
 
+	@Test
+	public void test_opponentKalahaSet(){
+		assertNotEquals(null,playerA.opponent.kalaha);
+	}
 }

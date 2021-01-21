@@ -31,6 +31,7 @@ public class PlayerTest{
 	@Test
 	public void test_last4BowlsMadeCorrectly(){
 		Kalaha startpoint = new Kalaha(playerA,null);
+		playerA.setOpponent(playerB);
 		Bowl test = new Bowl(startpoint,5);
 		assertEquals(test.opposite,test.neighbour.neighbour.neighbour.neighbour);
 	}

@@ -5,6 +5,7 @@ public class Bowl extends Kalaha{
 
 	Bowl(){
 		super();
+		stones = 4;
 	}
 
 	// Constructor for first row of bowls
@@ -16,7 +17,7 @@ public class Bowl extends Kalaha{
 		//make neighbour
 		if (n == 6) {
 			// special case: neighbour is Kalaha
-			neighbour = new Kalaha(null,opposite);
+			neighbour = new Kalaha(owner,opposite);
 		}
 		else{
 			//make next bowl
@@ -32,6 +33,29 @@ public class Bowl extends Kalaha{
 		this.owner = neighbour.owner;
 	}
 
+	public void startMove() throws  Exception{
+		if (owner.isActivePlayer()){
+			emptySelf();
 
+		}
+		else{
+			throw new Exception("Must select a bowl of the active player!");
+		}
+	}
+
+	public void emptySelf(){
+		stones = 0;
+	}
+
+	public void passStones(int stones){
+		addStones(1);
+		if (stones!=1){
+			neighbour.passStones(stones-1);
+		}
+		else{
+		// steal?
+			owner.switchActivePlayer();
+		}
+	}
 
 }

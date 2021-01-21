@@ -12,6 +12,7 @@ public class Kalaha{
 	Kalaha(Player owner, Kalaha neighbour){
 		this.owner = owner;
 		this.neighbour = neighbour;
+		this.owner.kalaha = this;
 	}
 	
 	public int getStones(){

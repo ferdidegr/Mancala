@@ -11,6 +11,7 @@ Player(String name, String opponentName){
 	setOpponent(new Player(opponentName));
 	kalaha = new Kalaha(this, null);
 	kalaha.neighbour = new Bowl(this.kalaha,1);
+	setActivePlayer();
 }
 
 Player(String name){
@@ -31,6 +32,15 @@ public boolean isActivePlayer(){
 public void setActivePlayer(){
 	ActivePlayer = true;
 	opponent.ActivePlayer = false;
+}
+
+public void switchActivePlayer(){
+	if (ActivePlayer){
+		opponent.setActivePlayer();
+	}
+	else{
+		setActivePlayer();
+	}
 }
 
 
