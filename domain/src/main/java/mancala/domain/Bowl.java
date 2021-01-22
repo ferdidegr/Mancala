@@ -3,11 +3,6 @@ package mancala.domain;
 public class Bowl extends Kalaha{
 	Bowl opposite;
 
-	Bowl(){
-		super();
-		stones = 4;
-	}
-
 	// Constructor for first row of bowls
 	Bowl(Kalaha oppNeighbour, int n){
 		stones = 4;
@@ -33,19 +28,23 @@ public class Bowl extends Kalaha{
 		this.owner = neighbour.owner;
 	}
 
-	public void startMove() throws  Exception{
+	public void startMove() throws Exception{
 		if (owner.isActivePlayer()){
-			emptySelf();
-
+			if (getStones() != 0) {
+				int amountToPass = getStones();
+				emptySelf();
+				neighbour.passStones(amountToPass);
+			}
+			else{
+				throw new Exception("Cannot select an empty bowl!");
+			}
 		}
 		else{
 			throw new Exception("Must select a bowl of the active player!");
 		}
 	}
 
-	public void emptySelf(){
-		stones = 0;
-	}
+
 
 	public void passStones(int stones){
 		addStones(1);
@@ -53,9 +52,27 @@ public class Bowl extends Kalaha{
 			neighbour.passStones(stones-1);
 		}
 		else{
-		// steal?
+			if (owner.isActivePlayer()){
+				steal();
+			}
 			owner.switchActivePlayer();
 		}
+	}
+
+	public void steal(){
+		opposite.donateStonesToOpposite();
+		int totalToAdd = stones;
+		emptySelf();
+		owner.kalaha.addStones(totalToAdd);
+	}
+
+	public void donateStonesToOpposite(){
+		opposite.addStones(stones);
+		emptySelf();
+	}
+
+	public void emptySelf(){
+		stones = 0;
 	}
 
 }

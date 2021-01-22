@@ -29,4 +29,17 @@ public class KalahaTest{
 	public void test_opponentKalahaSet(){
 		assertNotEquals(null,playerA.opponent.kalaha);
 	}
+
+	@Test
+	public void test_stoneAddedToOwnKalaha(){
+		playerA.opponent.kalaha.neighbour.passStones(8);
+		assertEquals(1,playerA.kalaha.getStones());
+	}
+
+	@Test
+	public void test_noStonesAddedToOpponentsKalaha(){
+		playerA.kalaha.neighbour.passStones(10);
+		assertEquals(0,playerA.opponent.kalaha.getStones());
+	}
+
 }

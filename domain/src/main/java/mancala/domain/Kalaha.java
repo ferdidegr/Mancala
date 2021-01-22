@@ -30,6 +30,9 @@ public class Kalaha{
 				neighbour.passStones(stones-1);
 			}
 		}
+		else {
+			neighbour.passStones(stones);
+		}
 	}
 	
 }

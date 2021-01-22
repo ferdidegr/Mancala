@@ -1,13 +1,18 @@
 package mancala.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest{
-
 	Player playerA = new Player("Player A");
 	Player playerB = new Player("Player B");
-	Player full = new Player("A","B");
+	Player full = new Player("A", "B");
+
+	@BeforeEach
+	public void initAll() {
+		playerA.setOpponent(playerB);
+	}
 
 	@Test
 	public void test_namePlayerA(){
@@ -16,14 +21,12 @@ public class PlayerTest{
 	
 	@Test
 	public void test_linkedOpponents(){
-		playerA.setOpponent(playerB);
 		assertEquals(playerB,playerA.opponent);
 		assertEquals(playerA,playerB.opponent);
 	}
 		
 	@Test
 	public void test_setActivePlayer(){
-		playerA.setOpponent(playerB);
 		playerA.setActivePlayer();
 		assertFalse(playerB.isActivePlayer());
 	}
@@ -31,7 +34,6 @@ public class PlayerTest{
 	@Test
 	public void test_last4BowlsMadeCorrectly(){
 		Kalaha startpoint = new Kalaha(playerA,null);
-		playerA.setOpponent(playerB);
 		Bowl test = new Bowl(startpoint,5);
 		assertEquals(test.opposite,test.neighbour.neighbour.neighbour.neighbour);
 	}
