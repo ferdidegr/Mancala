@@ -35,5 +35,21 @@ public class Kalaha{
 		}
 		return referencePoint;
 	}
+
+	public void addStones(int stoneAmount){
+		stones += stoneAmount;
+	}
+
+	public void passStones(int stonesPassed){
+		if(owner.isActivePlayer()){
+			addStones(1);
+			if (stonesPassed!=1){
+				neighbour.passStones(stonesPassed-1);
+			}
+		}
+		else{
+			neighbour.passStones(stonesPassed);
+		}
+	}
 	
 }

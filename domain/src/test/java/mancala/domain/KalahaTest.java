@@ -25,9 +25,25 @@ public class KalahaTest {
         assertEquals(kalahaA.getKalahaBySteps(2),kalahaA.neighbour.neighbour);
     }
 
+    @Test
+    public void constructFullKalahaWithBowlsInLoop(){
+        assertEquals(kalahaA,kalahaA.getKalahaBySteps(14));
+    }
 
     @Test
-    public void constructKalahaWithBowlsInLoop(){
-        assertEquals(kalahaA,kalahaA.getKalahaBySteps(14));
+    public void addStonesToKalaha(){
+        kalahaA.addStones(3);
+        assertEquals(3,kalahaA.stones);
+    }
+
+    @Test
+    public void passOneStoneTurnDoesNotChange(){
+        kalahaA.passStones(1);
+        assertTrue(kalahaA.owner.isActivePlayer());
+    }
+    @Test
+    public void passStonesWithNotActivePlayerOwnerDoesNotAdd(){
+        kalahaA.getKalahaBySteps(7).passStones(1);
+        assertEquals(0,kalahaA.getKalahaBySteps(7).stones);
     }
 }

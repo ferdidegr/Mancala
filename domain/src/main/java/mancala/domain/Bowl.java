@@ -38,4 +38,32 @@ public class Bowl extends Kalaha{
 		ref = ref.getKalahaBySteps(steps);
 		return ref;
 	}
+
+	public Kalaha getOwnKalaha(){
+		Kalaha ref = this.copy();
+		do{
+			ref = ref.neighbour;
+		}
+		while(ref instanceof Bowl);
+		return ref;
+	}
+
+	public Kalaha getOppKalaha(){
+		Kalaha ref = getOwnKalaha();
+		ref = ref.getKalahaBySteps(7);
+		return ref;
+	}
+
+	public void passStones(int stonesAmount){
+		addStones(1);
+		if (stonesAmount!=1){
+			neighbour.passStones(stonesAmount-1);
+		}
+		else{
+			if (owner.isActivePlayer()){
+				//steal
+			}
+			owner.switchActivePlayer();
+		}
+	}
 }
