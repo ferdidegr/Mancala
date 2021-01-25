@@ -27,7 +27,7 @@ public class Bowl extends Kalaha{
 		}
 	}
 
-	public Kalaha getOpposite(){
+	public Bowl getOpposite(){
 		Kalaha ref = this.copy();
 		int steps = 0;
 		do{
@@ -36,7 +36,7 @@ public class Bowl extends Kalaha{
 		}
 		while(ref instanceof Bowl);
 		ref = ref.getKalahaBySteps(steps);
-		return ref;
+		return (Bowl) ref;
 	}
 
 	public Kalaha getOwnKalaha(){
@@ -60,10 +60,32 @@ public class Bowl extends Kalaha{
 			neighbour.passStones(stonesAmount-1);
 		}
 		else{
-			if (owner.isActivePlayer()){
-				//steal
+			if (owner.isActivePlayer() && stones == 1){
+				getOpposite().getStolen();
+				getOwnKalaha().addStones(1);
+				emptySelf();
 			}
 			owner.switchActivePlayer();
+		}
+	}
+
+	public void emptySelf(){
+		stones = 0;
+	}
+
+	public void getStolen(){
+		getOppKalaha().addStones(stones);
+		emptySelf();
+	}
+
+	public void startMove() throws Exception {
+		if (owner.isActivePlayer()) {
+			int stonesToPass = stones;
+			emptySelf();
+			neighbour.passStones(stonesToPass);
+		}
+		else {
+			throw new Exception("Selected bowl is not owned by the active player.");
 		}
 	}
 }
