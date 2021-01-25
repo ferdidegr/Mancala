@@ -2,38 +2,41 @@ package mancala.domain;
 
 public class Kalaha{
 	int stones = 0;
-	Player owner;
+	private Player owner;
 	Kalaha neighbour;
 
-	Kalaha(){
+	Kalaha(){}
 
+	Kalaha(int stones, Player owner, Kalaha neighbour){
+		this.stones = stones;
+		this.neighbour = neighbour;
+		this.owner = owner;
 	}
 
-	Kalaha(Player owner,Kalaha neighbour){
+	Kalaha(Player owner, Kalaha neighbour, int[] stoneList, int i){
 		this.owner = owner;
 		this.neighbour = neighbour;
-		new Bowl(owner,this,6);
+		new Bowl(owner,this,6, stoneList, i+1);
 	}
 
 	public void makeLoop(){
-		owner = new Player("Player A","Player B");
-		new Bowl(owner,this,6);
+		makeLoop(new int[]{4,4,4,4,4,4,4,4,4,4,4,4});
 	}
 
-	public Kalaha copy(){
-		Kalaha copy = new Kalaha();
-		copy.owner = owner;
-		copy.neighbour = neighbour;
-		copy.stones = stones;
-		return copy;
+	public void makeLoop(int[] stoneList){
+		owner = new Player("Player A","Player B");
+		new Bowl(owner,this,6, stoneList, 0);
+	}
+
+	public Player getOwner(){
+		return owner;
 	}
 
 	public Kalaha getKalahaBySteps(int steps){
-		Kalaha referencePoint = this.copy();
-		for (int i=0;i<steps;i++){
-			referencePoint = referencePoint.neighbour;
+		if (steps != 1) {
+			return neighbour.getKalahaBySteps(steps-1);
 		}
-		return referencePoint;
+		return neighbour;
 	}
 
 	public void addStones(int stoneAmount){
@@ -51,5 +54,25 @@ public class Kalaha{
 			neighbour.passStones(stonesPassed);
 		}
 	}
-	
+
+	public Kalaha getOwnKalaha() {
+		return this;
+	}
+
+	public Kalaha getOpposite() {
+		return this;
+	}
+
+	public Kalaha getNeighbour(){
+		return neighbour;
+	}
+
+	public void connectEndWith(Kalaha kalaha){
+		if (neighbour == null){
+			neighbour = kalaha;
+		}
+		else{
+			neighbour.connectEndWith(kalaha);
+		}
+	}
 }

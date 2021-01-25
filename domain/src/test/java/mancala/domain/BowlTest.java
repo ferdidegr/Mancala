@@ -20,19 +20,19 @@ public class BowlTest {
 
     @Test
     public void newBowlButNotLast(){
-        Bowl testbowl = new Bowl(playerA,null,3);
+        Bowl testbowl = new Bowl(playerA,null,3,new int[]{4,4,4,4,4,4,4,4,4,4,4,4},0);
         assertTrue(testbowl.neighbour instanceof Bowl);
     }
 
     @Test
     public void lastTwoBowlsAndNotActivePlayerSoCloseLoop(){
-        Bowl testbowl = new Bowl(playerA.opponent,null,2);
+        Bowl testbowl = new Bowl(playerA.getOpponent(),null,2,new int[]{4,4,4,4,4,4,4,4,4,4,4,4},0);
         assertEquals(testbowl,testbowl.getKalahaBySteps(2));
     }
 
     @Test
     public void lastBowlAndActivePlayerSoNewKalaha(){
-        Bowl testbowl = new Bowl(playerA,null,1);
+        Bowl testbowl = new Bowl(playerA,null,1,new int[]{4,4,4,4,4,4,4,4,4,4,4,4},0);
         assertFalse(testbowl.getKalahaBySteps(7) instanceof Bowl);
     }
 
@@ -60,7 +60,7 @@ public class BowlTest {
     @Test
     public void passStonesSwitchesPlayer(){
         kalahaA.neighbour.passStones(1);
-        assertFalse(kalahaA.owner.isActivePlayer());
+        assertFalse(kalahaA.getOwner().isActivePlayer());
     }
 
     @Test

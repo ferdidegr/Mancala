@@ -14,13 +14,6 @@ public class KalahaTest {
     }
 
     @Test
-    public void testCopy(){
-        Kalaha kalahaB = kalahaA.copy();
-        assertNotSame(kalahaA, kalahaB);
-        assertEquals(kalahaA.neighbour,kalahaB.neighbour);
-    }
-
-    @Test
     public void getBowlTwoStepsAhead(){
         assertEquals(kalahaA.getKalahaBySteps(2),kalahaA.neighbour.neighbour);
     }
@@ -39,7 +32,7 @@ public class KalahaTest {
     @Test
     public void passOneStoneTurnDoesNotChange(){
         kalahaA.passStones(1);
-        assertTrue(kalahaA.owner.isActivePlayer());
+        assertTrue(kalahaA.getOwner().isActivePlayer());
     }
     @Test
     public void passStonesWithNotActivePlayerOwnerDoesNotAdd(){

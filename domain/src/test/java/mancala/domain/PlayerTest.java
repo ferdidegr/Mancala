@@ -8,18 +8,12 @@ public class PlayerTest{
 
 	@Test
 	public void makePlayerWithOpponent(){
-		assertEquals("B",playerA.opponent.name);
-	}
-
-	@Test
-	public void setActivePlayer(){
-		playerA.opponent.setActivePlayer();
-		assertTrue(playerA.opponent.isActivePlayer());
+		assertEquals("B",playerA.getOpponent().getName());
 	}
 
 	@Test
 	public void switchActivePlayer(){
 		playerA.switchActivePlayer();
-		assertTrue(playerA.opponent.isActivePlayer());
+		assertTrue(playerA.getOpponent().isActivePlayer());
 	}
 }
