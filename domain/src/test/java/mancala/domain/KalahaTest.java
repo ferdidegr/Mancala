@@ -15,7 +15,7 @@ public class KalahaTest {
 
     @Test
     public void getBowlTwoStepsAhead(){
-        assertEquals(kalahaA.getKalahaBySteps(2),kalahaA.neighbour.neighbour);
+        assertEquals(kalahaA.getKalahaBySteps(2),kalahaA.getNeighbour().getNeighbour());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class KalahaTest {
     @Test
     public void addStonesToKalaha(){
         kalahaA.addStones(3);
-        assertEquals(3,kalahaA.stones);
+        assertEquals(3,kalahaA.getStones());
     }
 
     @Test
@@ -37,6 +37,6 @@ public class KalahaTest {
     @Test
     public void passStonesWithNotActivePlayerOwnerDoesNotAdd(){
         kalahaA.getKalahaBySteps(7).passStones(1);
-        assertEquals(0,kalahaA.getKalahaBySteps(7).stones);
+        assertEquals(0,kalahaA.getKalahaBySteps(7).getStones());
     }
 }

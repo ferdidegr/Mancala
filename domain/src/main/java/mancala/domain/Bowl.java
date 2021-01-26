@@ -16,17 +16,17 @@ public class Bowl extends Kalaha{
 			}
 			else{
 				//Find start of chain, make connection to this
-				neighbour.connectEndWith(this);
+				getNeighbour().connectEndWith(this);
 			}
 		}
 	}
 
 	public Bowl getOpposite(){
-		return (Bowl) neighbour.getOpposite().getNeighbour();
+		return (Bowl) getNeighbour().getOpposite().getNeighbour();
 	}
 
 	public Kalaha getOwnKalaha(){
-		return neighbour.getOwnKalaha();
+		return getNeighbour().getOwnKalaha();
 	}
 
 	public Kalaha getOppKalaha(){
@@ -36,10 +36,10 @@ public class Bowl extends Kalaha{
 	public void passStones(int stonesAmount){
 		addStones(1);
 		if (stonesAmount!=1){
-			neighbour.passStones(stonesAmount-1);
+			getNeighbour().passStones(stonesAmount-1);
 		}
 		else{
-			if (getOwner().isActivePlayer() && stones == 1){
+			if (getOwner().isActivePlayer() && getStones() == 1){
 				getOpposite().getStolen();
 				getOwnKalaha().addStones(1);
 				emptySelf();
@@ -48,20 +48,16 @@ public class Bowl extends Kalaha{
 		}
 	}
 
-	public void emptySelf(){
-		stones = 0;
-	}
-
 	public void getStolen(){
-		getOppKalaha().addStones(stones);
+		getOppKalaha().addStones(getStones());
 		emptySelf();
 	}
 
 	public void startMove() throws Exception {
 		if (getOwner().isActivePlayer()) {
-			int stonesToPass = stones;
+			int stonesToPass = getStones();
 			emptySelf();
-			neighbour.passStones(stonesToPass);
+			getNeighbour().passStones(stonesToPass);
 		}
 		else {
 			throw new Exception("Selected bowl is not owned by the active player.");

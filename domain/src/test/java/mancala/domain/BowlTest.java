@@ -21,7 +21,7 @@ public class BowlTest {
     @Test
     public void newBowlButNotLast(){
         Bowl testbowl = new Bowl(playerA,null,3,new int[]{4,4,4,4,4,4,4,4,4,4,4,4},0);
-        assertTrue(testbowl.neighbour instanceof Bowl);
+        assertTrue(testbowl.getNeighbour() instanceof Bowl);
     }
 
     @Test
@@ -53,32 +53,32 @@ public class BowlTest {
 
     @Test
     public void passStonesAddsOne(){
-        kalahaA.neighbour.passStones(1);
-        assertEquals(5,kalahaA.neighbour.stones);
+        kalahaA.getNeighbour().passStones(1);
+        assertEquals(5,kalahaA.getNeighbour().getStones());
     }
 
     @Test
     public void passStonesSwitchesPlayer(){
-        kalahaA.neighbour.passStones(1);
+        kalahaA.getNeighbour().passStones(1);
         assertFalse(kalahaA.getOwner().isActivePlayer());
     }
 
     @Test
     public void emptySelf(){
         B1.emptySelf();
-        assertEquals(0,kalahaA.neighbour.stones);
+        assertEquals(0,kalahaA.getNeighbour().getStones());
     }
 
     @Test
     public void getStolenIsEmpty(){
         B1.getStolen();
-        assertEquals(0,B1.stones);
+        assertEquals(0,B1.getStones());
     }
 
     @Test
     public void getStolenAddedToOppKalaha(){
         B1.getStolen();
-        assertEquals(4,kalahaA.stones);
+        assertEquals(4,kalahaA.getStones());
     }
 
     @Test
@@ -88,16 +88,22 @@ public class BowlTest {
 
     @Test
     public void startMoveWith14EndWith1() throws Exception{
-        A1.stones = 14;
+        Kalaha testK = new Kalaha();
+        testK.makeLoop(new int[]{4,4,4,4,4,14,4,4,4,4,4,4});
+        A1 = (Bowl)testK.getKalahaBySteps(8);
         A1.startMove();
-        assertEquals(1,A1.stones);
+        assertEquals(1,A1.getStones());
     }
 
     @Test
     public void startMoveWith13EndWith0() throws Exception{
-        A1.stones = 13;
+        Kalaha testK = new Kalaha();
+        testK.makeLoop(new int[]{4,4,4,4,4,13,4,4,4,4,4,4});
+        A1 = (Bowl)testK.getKalahaBySteps(8);
         A1.startMove();
-        assertEquals(0,A1.stones);
+        assertEquals(0,A1.getStones());
     }
+
+
 
 }
