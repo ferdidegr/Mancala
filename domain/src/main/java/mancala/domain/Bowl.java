@@ -33,6 +33,7 @@ public class Bowl extends Kalaha{
 		return getOwnKalaha().getKalahaBySteps(7);
 	}
 
+	@Override
 	public void passStones(int stonesAmount){
 		addStones(1);
 		if (stonesAmount!=1){
@@ -48,7 +49,7 @@ public class Bowl extends Kalaha{
 		}
 	}
 
-	public void getStolen(){
+	protected void getStolen(){
 		getOppKalaha().addStones(getStones());
 		emptySelf();
 	}

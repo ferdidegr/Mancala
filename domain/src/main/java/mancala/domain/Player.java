@@ -38,7 +38,7 @@ public class Player{
 		opponent.isActivePlayer = false;
 	}
 
-	public void switchActivePlayer(){
+	protected void switchActivePlayer(){
 		if (isActivePlayer){
 			opponent.setActivePlayer();
 		}
