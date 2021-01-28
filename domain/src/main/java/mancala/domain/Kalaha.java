@@ -84,4 +84,17 @@ public class Kalaha {
             neighbour.connectEndWith(kalaha);
         }
     }
+
+    protected boolean hasGameEnded(){
+        boolean isOppDone = false;
+        if (owner.isActivePlayer()){
+            isOppDone = getKalahaBySteps(7).hasGameEnded();
+        }
+        boolean isSelfDone = getKalahaBySteps(8).isRowEmpty();
+        return (isSelfDone || isOppDone);
+    }
+
+    protected boolean isRowEmpty(){
+        return true;
+    }
 }

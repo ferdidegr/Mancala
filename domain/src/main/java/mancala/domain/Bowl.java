@@ -56,12 +56,25 @@ public class Bowl extends Kalaha{
 
 	public void startMove() throws Exception {
 		if (getOwner().isActivePlayer()) {
-			int stonesToPass = getStones();
-			emptySelf();
-			getNeighbour().passStones(stonesToPass);
+			if (getStones()!=0) {
+				int stonesToPass = getStones();
+				emptySelf();
+				getNeighbour().passStones(stonesToPass);
+			}
+			else {
+				throw new Exception("Selected bowl is empty");
+			}
 		}
 		else {
 			throw new Exception("Selected bowl is not owned by the active player.");
 		}
+	}
+
+	@Override
+	protected boolean isRowEmpty() {
+		if (getStones()!=0){
+			return false;
+		}
+		return getNeighbour().isRowEmpty();
 	}
 }

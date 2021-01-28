@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BowlTest {
 
     Kalaha kalahaA = new Kalaha();
+    Kalaha testK = new Kalaha();
     Player playerA = new Player("Player A","Player B");
     Bowl B1;
     Bowl A1;
@@ -87,8 +88,14 @@ public class BowlTest {
     }
 
     @Test
+    public void startMoveButBowlIsEmpty(){
+        testK.makeLoop(new int[]{4,4,4,4,4,0,4,4,4,4,4,4});
+        A1 = (Bowl)testK.getKalahaBySteps(8);
+        assertThrows(Exception.class, () -> A1.startMove());
+    }
+
+    @Test
     public void startMoveWith14EndWith1() throws Exception{
-        Kalaha testK = new Kalaha();
         testK.makeLoop(new int[]{4,4,4,4,4,14,4,4,4,4,4,4});
         A1 = (Bowl)testK.getKalahaBySteps(8);
         A1.startMove();
@@ -97,7 +104,6 @@ public class BowlTest {
 
     @Test
     public void startMoveWith13EndWith0() throws Exception{
-        Kalaha testK = new Kalaha();
         testK.makeLoop(new int[]{4,4,4,4,4,13,4,4,4,4,4,4});
         A1 = (Bowl)testK.getKalahaBySteps(8);
         A1.startMove();

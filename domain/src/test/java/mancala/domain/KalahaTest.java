@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KalahaTest {
 
     Kalaha kalahaA = new Kalaha();
+    Kalaha kalahaEmpty = new Kalaha();
 
     @BeforeEach
     public void init(){
@@ -39,4 +40,26 @@ public class KalahaTest {
         kalahaA.getKalahaBySteps(7).passStones(1);
         assertEquals(0,kalahaA.getKalahaBySteps(7).getStones());
     }
+
+    @Test
+    public void noSidesAreEmptyGameHasNotEnded(){
+        assertFalse(kalahaA.hasGameEnded());
+    }
+
+    @Test
+    public void justSideAEmptyGameHasEnded(){
+        kalahaEmpty.makeLoop(new int[]{0,0,0,0,0,0,4,4,4,4,4,4});
+    }
+
+    @Test
+    public void justSideBEmptyGameHasEnded(){
+        kalahaEmpty.makeLoop(new int[]{4,4,4,4,4,4,0,0,0,0,0,0});
+    }
+
+    @Test
+    public void bothSidesEmptyGameHasEnded(){
+        kalahaEmpty.makeLoop(new int[]{0,0,0,0,0,0,0,0,0,0,0,0});
+    }
+
+
 }
