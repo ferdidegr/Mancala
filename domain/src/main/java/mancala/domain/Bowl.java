@@ -77,4 +77,11 @@ public class Bowl extends Kalaha{
 		}
 		return getNeighbour().isRowEmpty();
 	}
+
+	@Override
+	protected void moveStonesToKalaha(int stoneAmount) {
+		int stonesToMove = getStones();
+		emptySelf();
+		getNeighbour().moveStonesToKalaha(stoneAmount+stonesToMove);
+	}
 }

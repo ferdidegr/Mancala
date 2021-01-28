@@ -49,16 +49,42 @@ public class KalahaTest {
     @Test
     public void justSideAEmptyGameHasEnded(){
         kalahaEmpty.makeLoop(new int[]{0,0,0,0,0,0,4,4,4,4,4,4});
+        assertTrue(kalahaEmpty.hasGameEnded());
     }
 
     @Test
     public void justSideBEmptyGameHasEnded(){
         kalahaEmpty.makeLoop(new int[]{4,4,4,4,4,4,0,0,0,0,0,0});
+        assertTrue(kalahaEmpty.hasGameEnded());
     }
 
     @Test
     public void bothSidesEmptyGameHasEnded(){
         kalahaEmpty.makeLoop(new int[]{0,0,0,0,0,0,0,0,0,0,0,0});
+        assertTrue(kalahaEmpty.hasGameEnded());
+    }
+
+    @Test
+    public void noWinnerYetThrowsException(){
+        assertThrows(Exception.class, () -> kalahaA.getWinner());
+    }
+
+    @Test
+    public void playerBWins() throws Exception{
+        kalahaEmpty.makeLoop(new int[]{0,0,0,0,0,0,4,4,4,4,4,4});
+        assertEquals("Player B",kalahaEmpty.getWinner());
+    }
+
+    @Test
+    public void playerAWins() throws Exception{
+        kalahaEmpty.makeLoop(new int[]{4,4,4,4,4,4,0,0,0,0,0,0});
+        assertEquals("Player A",kalahaEmpty.getWinner());
+    }
+
+    @Test
+    public void gameIsDrawn() throws Exception{
+        kalahaEmpty.makeLoop(new int[]{0,0,0,0,0,0,0,0,0,0,0,0});
+        assertEquals("Draw",kalahaEmpty.getWinner());
     }
 
 

@@ -97,4 +97,28 @@ public class Kalaha {
     protected boolean isRowEmpty(){
         return true;
     }
+
+    protected void moveStonesToKalaha(int stoneAmount){
+        stones += stoneAmount;
+    }
+
+    protected String getWinner() throws Exception{
+        if (!hasGameEnded()){
+            throw new Exception("Game has not ended yet!");
+        }
+        String winner;
+        neighbour.moveStonesToKalaha(0);
+        getKalahaBySteps(8).moveStonesToKalaha(0);
+        int oppStones = getKalahaBySteps(7).getStones();
+        if (stones == oppStones){
+            winner = "Draw";
+        }
+        else if (stones > oppStones){
+            winner = owner.getName();
+        }
+        else{
+            winner = owner.getOpponent().getName();
+        }
+        return winner;
+    }
 }
