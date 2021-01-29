@@ -34,7 +34,7 @@ public class Bowl extends Kalaha{
 	}
 
 	@Override
-	public void passStones(int stonesAmount){
+	protected void passStones(int stonesAmount){
 		addStones(1);
 		if (stonesAmount!=1){
 			getNeighbour().passStones(stonesAmount-1);
