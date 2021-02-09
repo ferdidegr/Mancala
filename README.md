@@ -1,3 +1,10 @@
+Implementation of the OOP Mancala assignment.
+
+
+
+
+Description of the assignment:
+
 # Mancala
 
 This repository contains the files for three modules:
